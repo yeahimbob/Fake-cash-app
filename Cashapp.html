@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fake Cash App</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #00d632;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 1rem;
+    }
+    .profile {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .profile input {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      width: 80%;
+    }
+    .balance {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .balance input {
+      font-size: 2rem;
+      border: none;
+      text-align: center;
+      width: 100%;
+      background: transparent;
+    }
+    .actions button {
+      background-color: #00d632;
+      color: white;
+      border: none;
+      padding: 1rem;
+      width: 48%;
+      font-size: 1rem;
+      border-radius: 10px;
+      margin: 1%;
+    }
+    .activity {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .activity h3 {
+      margin-top: 0;
+    }
+    .activity ul {
+      list-style: none;
+      padding: 0;
+    }
+    .activity li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>Cash App</header>
+  <div class="container">
+    <div class="profile">
+      <label for="username">Username:</label><br>
+      <input id="username" placeholder="Enter your name" />
+    </div>
+    <div class="balance">
+      <label>Balance:</label><br>
+      <input id="balance" value="$100.00" />
+    </div>
+    <div class="actions">
+      <button onclick="fakeSend()">Send</button>
+      <button onclick="fakeReceive()">Receive</button>
+    </div>
+    <div class="activity">
+      <h3>Activity</h3>
+      <ul id="activityList">
+        <li>Received $20 from @mom</li>
+        <li>Sent $45 to @foodtruck</li>
+      </ul>
+    </div>
+  </div>  <script>
+    function fakeSend() {
+      const name = prompt("Send to (e.g. @john):");
+      const amount = prompt("Amount to send:");
+      if (name && amount) {
+        const list = document.getElementById("activityList");
+        const li = document.createElement("li");
+        li.textContent = `Sent $${amount} to ${name}`;
+        list.prepend(li);
+        updateBalance(-parseFloat(amount));
+      }
+    }
+
+    function fakeReceive() {
+      const name = prompt("Receive from (e.g. @sister):");
+      const amount = prompt("Amount to receive:");
+      if (name && amount) {
+        const list = document.getElementById("activityList");
+        const li = document.createElement("li");
+        li.textContent = `Received $${amount} from ${name}`;
+        list.prepend(li);
+        updateBalance(parseFloat(amount));
+      }
+    }
+
+    function updateBalance(change) {
+      let balanceField = document.getElementById("balance");
+      let current = parseFloat(balanceField.value.replace("$", ""));
+      current += change;
+      balanceField.value = `$${current.toFixed(2)}`;
+    }
+  </script></body>
+</html>
